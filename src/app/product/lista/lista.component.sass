@@ -1,0 +1,82 @@
+.container
+    display: flex
+    flex-direction: column
+    width: 100%
+    .box
+        display: flex
+        align-items: center
+        width: 100%
+        min-height: 42px
+        border-bottom: solid 1.2px rgb(217, 220, 226)
+        padding: 0 15px
+        .checkbox
+            position: relative
+            width: 41px
+            height: 24px
+            input[type="checkbox"]
+                appearance: none /* Esto quita el estilo predeterminado del checkbox del navegador */
+                -webkit-appearance: none /* Para navegadores basados en Webkit (como Safari) */
+                -moz-appearance: none
+                width: 24px
+                height: 24px
+                margin-right: 17px
+                border: solid 2px rgb(232, 233, 234)
+                border-radius: 4px
+                background-color: white
+            input[type="checkbox"]:checked 
+                background-color: rgb(45, 209, 177)
+            span
+                display: none
+                position: absolute
+                top: 100%
+                left: 50%
+                transform: translateX(-50%)
+                background-color: #000000
+                color: #fff
+                padding: 5px
+                border-radius: 5px
+                font-size: 12px
+                font-weight: 500
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+            &:hover
+                span
+                    display: block
+        .producto
+            width: 100%
+            max-width: 460px
+            font-weight: 500
+            font-size: 14px
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+        .categoria, .stock, .und
+            width: 100%
+            max-width: 189px
+            font-weight: 500
+            font-size: 14px
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+        .stock
+            max-width: 100px
+        .basura
+            display: flex
+            justify-content: flex-end
+            width: 100%
+            max-width: 40px
+            img
+                cursor: pointer
+                width: 20px
+                height: 20px
+        
+        @media screen and (max-width: 700px)
+            flex-wrap: wrap
+            padding: 10px
+            .basura,.stock,.categoria,.producto,.checkbox
+                width: 100%
+                max-width: 100%
+        &.lista
+            padding: 10px
+            p
+                color: rgb(83, 93, 110)
+                @media screen and (max-width: 700px)          
+                    font-size: 12px
+                    word-break: break-all
+            &:hover
+                background-color: white

@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="search" id="search">
+        <input type="search" placeholder="Articulo nuevo">
+        <img src="assets/icons/lupa.png" alt="" class="icon">
+    </div>
+    <div class="box">
+        <div class="filtro" *ngIf="false">
+            <img src="assets/icons/filtrar.png" alt="" class="icon">
+            <p>Filtro</p>
+        </div>
+        <div class="filtro" (click)="openFiltro()">
+            <img src="assets/icons/categoria.png" alt="" class="icon">
+            <p>Categorias</p>
+        </div>
+    </div>
+    <button class="boton" routerLink="/create">
+        <img src="assets/icons/mas.png" alt="" class="icon">
+        <p>Producto</p>
+    </button>
+</div>

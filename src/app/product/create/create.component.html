@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="formulario" *ngIf="isLoad">
+        <div class="box_card">
+            <div class="card">
+                <p *ngIf="!miFormulario.value.material">MATERIAL</p>
+                <p>{{miFormulario.value.categoria}}</p>
+                <p>{{miFormulario.value.material | uppercase}}</p>
+                <p>{{miFormulario.value.cantidad}} {{miFormulario.value.und_medida | uppercase}}</p>
+                <p>{{miFormulario.value.descripcion | uppercase}}</p>
+                <p>{{miFormulario.value.bodega | uppercase}}</p>
+            </div>
+        </div>
+        <form (ngSubmit)="enviarMaterial(miFormulario.value, isNew)" class="form" [formGroup]="miFormulario">
+            <h1>{{mensajeTitulo}}:</h1>
+            <div class="box">
+                <label for="categoria">Categoria:</label>
+                <select name="categoria" id="categoria" formControlName="categoria" >
+                    <option value=""></option>
+                    <option *ngFor="let categoria of categorias" value={{categoria.name}}> {{categoria.name}}</option>
+                </select>
+                <div class="invalid-feeback" *ngIf="miFormulario.get('categoria')?.touched && miFormulario.get('categoria')?.errors?.['required']">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="material">Material:</label>
+                <input type="text" id="material" name="material" formControlName="material"  >
+                <div *ngIf="miFormulario.get('material')?.touched && miFormulario.get('material')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="descripcion">Descripcion:</label>
+                <input type="text" id="descripcion" name="descripcion" formControlName="descripcion"  >
+                <div *ngIf="miFormulario.get('descripcion')?.touched && miFormulario.get('descripcion')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <div class="box" *ngIf="!isNew">
+                <label for="cantidad">Stock:</label>
+                <input type="number" id="cantidad" name="cantidad" formControlName="cantidad"  >
+                <div *ngIf="miFormulario.get('cantidad')?.touched && miFormulario.get('cantidad')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+                <div *ngIf="miFormulario.get('cantidad')?.errors?.['min']" class="invalid-feeback">No se permiten numeros negativos</div>
+            </div>
+            <div class="box">
+                <label for="und">Und Medida:</label>
+                <select name="und_medida" formControlName="und_medida" require id="und">
+                    <option value=""></option>
+                    <option *ngFor="let und of undMedida" value={{und.name}}>{{und.name}}</option>
+                </select>
+                <div *ngIf="miFormulario.get('und_medida')?.touched && miFormulario.get('und_medida')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="bodega">Lugar de almacenamiento:</label>
+                <select name="bodega" id="bodega" formControlName="bodega"  >
+                    <option value=""></option>
+                    <option value="BODEGA MONTES">BODEGA MONTES</option>
+                    <option value="BODEGA NISSI">BODEGA NISSI</option>
+                </select>
+                <div *ngIf="miFormulario.get('bodega')?.touched && miFormulario.get('bodega')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <button type="submit" [disabled]="miFormulario.invalid">{{mensajeBoton}}</button>
+        </form>
+    </div>
+    <div class="descripcion">
+        <div class="stock" >
+            <p class="titulo">Stock</p>
+            <input type="number" placeholder="Stock Actual" [(ngModel)]="stock" [disabled]="!isNew">
+        </div>
+        <div class="movimientos" *ngIf="isNew">
+            <p class="titulo">Historial de movimientos</p>
+            <div class="informacion">
+                <div class="mostrar" (click)="getSalidas();" *ngIf="isSalidas">
+                    <img src="assets/icons/lista.png" alt="">
+                    <p>Mostrar resultados</p>
+                </div>
+                <ng-container *ngIf="!isSalidas">
+                    <div class="box_tabla" *ngFor="let salida of salidas">
+                        <p class="producto">{{salida.fecha}}</p>
+                        <p class="producto">{{salida.obra}}</p>
+                        <p class="categoria">{{salida.cantidad}}</p>
+                        <p class="contratista">{{salida.contratista}}</p>
+                    </div>
+                    <div class="mostrar" *ngIf="salidas.length == 0"><p>No se encontraron registros.</p></div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>

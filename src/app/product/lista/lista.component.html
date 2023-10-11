@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="box">
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+        </div>
+        <p class="producto">Producto</p>
+        <p class="producto">Descripcion</p>
+        <p class="categoria">Categoria</p>
+        <p class="stock">Stock</p>
+        <p class="und">Und Medida</p>
+        <p class="basura"></p>
+    </div>
+    <div class="box lista" *ngFor="let material of materiales" (click)="dataMaterial(material)" routerLink="/create">
+        <div class="checkbox">
+            <input type="checkbox" name="" id="">
+            <span>Seleccionar</span>
+        </div>
+        <p class="producto">{{material.name}} <br> id: {{material.id}}</p>
+        <p class="producto">{{material.description}}</p>
+        <p class="categoria">{{material.type_material}}</p>
+        <p class="stock">{{material.amount}}</p>
+        <p class="und">{{material.und_m}}</p>
+        <div class="basura">
+            <img src="assets/icons/pepelera.png" alt="">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container">
+    <ng-container *ngIf="estado; else product">
+        <p class="titulo">Productos</p>
+        <p class="subTitulo">{{amount}} articulos registrados</p>
+    </ng-container>
+    <ng-template #product>
+        <img src="assets/icons/volver.png" alt="" class="icon" (click)="volver()">
+        <p class="subTitulo">{{nameProduct}}</p>
+    </ng-template>
+
+    <div class="box" (click)="openSidebar()">
+        <div class="perfil">M R</div>
+        <p>Miguel Rubiano</p>
+    </div>
+</div>

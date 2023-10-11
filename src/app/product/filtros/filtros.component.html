@@ -1,0 +1,16 @@
+<div class="container" >
+    <div class="ventana" (click)="closeModal()"></div>
+    <form #formFiltro="ngForm" class="container2" [ngClass]="{open: estado}" (ngSubmit)="verResultados(formFiltro)">
+        <div class="box_titulo">
+            <p class="titulo">Categorias</p>
+            <img src="assets/icons/cancelar.png" alt="" class="close" (click)="closeModal()">
+        </div>
+        <div class="box">        
+            <div class="checkbox" *ngFor="let categoria of categorias">
+                <input type="checkbox" name={{categoria.id}} id={{categoria.id}} ngModel required [(ngModel)]="categoria.state">
+                <label for={{categoria.id}}>{{categoria.name}}</label>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!formFiltro.dirty">Filtrar</button>
+    </form>
+</div>

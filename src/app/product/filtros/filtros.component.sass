@@ -1,0 +1,105 @@
+*
+    color: #363f4d
+    font-weight: 500
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+.container
+    position: fixed
+    display: flex
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, 0.46)
+    .ventana
+        width: 100%
+        height: 100%
+    .container2
+        position: fixed
+        top: 0
+        right: -400px
+        width: 90%
+        max-width: 400px
+        height: 100%
+        background-color: white
+        transition: 0.5s all
+        z-index: 1
+        .box_titulo
+            position: relative
+            width: 100%
+            height: max-content
+            padding: 15px
+            border-bottom: solid rgb(231, 231, 231) 1.2px
+            .close
+                position: absolute
+                top: 50%
+                transform: translateY(-50%)
+                right: 20px
+                width: 30px
+                height: 30px
+                padding: 5px
+                cursor: pointer
+                border-radius: 6px
+                &:hover
+                    background-color: rgb(239, 239, 239)
+
+
+        .box
+            width: 100%
+            height: max-content
+            padding: 15px
+            border-bottom: solid rgb(231, 231, 231) 1.2px
+            .titulo
+                margin-bottom: 30px
+            .checkbox
+                display: flex
+                position: relative
+                width: max-content
+                height: 24px
+                margin-bottom: 10px
+                p
+                    color: #363f4d
+                input[type="checkbox"]
+                    appearance: none /* Esto quita el estilo predeterminado del checkbox del navegador */
+                    -webkit-appearance: none /* Para navegadores basados en Webkit (como Safari) */
+                    -moz-appearance: none
+                    width: 20px
+                    height: 20px
+                    margin-right: 15px
+                    border: solid 2px rgb(232, 233, 234)
+                    border-radius: 4px
+                    background-color: white
+                input[type="checkbox"]:checked 
+                    background-color: rgb(45, 209, 177)
+                &:hover
+                    span
+                        display: block
+        
+        button
+            position: absolute
+            bottom: 0
+            left: 50%
+            transform: translateX(-50%)
+            display: flex
+            align-items: center
+            justify-content: center
+            min-width: 127px
+            height: 46px
+            background-color: rgb(45, 209, 177)
+            color: white
+            border: none
+            border-radius: 6px
+            cursor: pointer
+            margin-bottom: 10px
+            transition: 0.5s all
+            &:hover
+                background-color: rgb(37, 191, 151)
+            &:disabled
+                background-color: #dbdbdb
+                color: #f1f1f1
+                margin-bottom: -60px
+            p
+                font-weight: 600
+                font-size: 16px
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif
+    .open
+        right: 0

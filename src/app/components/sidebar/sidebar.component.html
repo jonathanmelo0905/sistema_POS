@@ -1,0 +1,15 @@
+<div class="container" [ngClass]="{'open': open, 'modal': !open}">
+    <img src="assets/icons/cancelar.png" alt="" class="close" (click)="open = false">
+    <div class="box" (click)="seleccion(0)" [ngClass]="{'select': selectId == 0}" routerLink="/salidas">
+        <img src="assets/icons/caja-cerrada.png" alt="" class="icon">
+        <p>Salidas</p>
+    </div>
+    <div class="box" (click)="seleccion(1)" [ngClass]="{'select': selectId == 1}" routerLink="/product">
+        <img src="assets/icons/aplicaciones.png" alt="" class="icon">
+        <p>Productos</p>
+    </div>
+    <!-- <div class="box"(click)="seleccion(2)" [ngClass]="{'select': selectId == 2}">
+        <img src="assets/icons/caja-abierta.png" alt="" class="icon">
+        <p>Entradas</p>
+    </div> -->
+</div>

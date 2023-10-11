@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="formulario" *ngIf="isLoad">
+        <div class="box_card">
+            <div class="card">
+                <p>MATERIAL SELECCIONADO</p>
+                <p *ngIf="!miFormulario.value.material">MATERIAL</p>
+                <p>{{miFormulario.value.categoria}}</p>
+                <p>{{miFormulario.value.material | uppercase}}</p>
+                <p>{{miFormulario.value.cantidad}} {{miFormulario.value.und_medida | uppercase}}</p>
+                <p>{{miFormulario.value.descripcion | uppercase}}</p>
+                <p>{{miFormulario.value.bodega | uppercase}}</p>
+            </div>
+        </div>
+        <form (ngSubmit)="enviarMaterial(formExit.value)" class="form" [formGroup]="formExit">
+            <h1>{{mensajeTitulo}}:</h1>
+            <div class="box">
+                <label for="fecha">Fecha de la solicitud:</label>
+                <input type="date" name="fecha" id="fecha" formControlName="fecha">
+                <div class="invalid-feeback" *ngIf="formExit.get('fecha')?.touched && formExit.get('fecha')?.errors?.['required']">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="person">Nombre del solicitante:</label>
+                <input type="text" id="person" name="person" formControlName="person">
+                <div *ngIf="formExit.get('person')?.touched && formExit.get('person')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="contratista">Nombre del contratista:</label>
+                <input type="text" name="contratista" id="contratista" formControlName="contratista">
+                <div *ngIf="formExit.get('contratista')?.touched && formExit.get('contratista')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="obra">Obra:</label>
+                <input type="text" name="obra" id="obra" formControlName="obra">
+                <div *ngIf="formExit.get('obra')?.touched && formExit.get('obra')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+            </div>
+            <div class="box">
+                <label for="cantidad">Cantidad requerida:</label>
+                <input type="number" id="cantidad" name="cantidad" formControlName="cantidad" min="0.1" >
+                <div *ngIf="formExit.get('cantidad')?.touched && formExit.get('cantidad')?.errors?.['required']" class="invalid-feeback">Este campo es requerido</div>
+                <div *ngIf="formExit.get('cantidad')?.errors?.['max']" class="invalid-feeback">La unidades maximas disponibles son {{formExit.get('cantidad')?.errors?.['max'].max}}</div>
+                <div *ngIf="formExit.get('cantidad')?.errors?.['min']" class="invalid-feeback">La unidades minima disponibles son {{formExit.get('cantidad')?.errors?.['min'].min}}</div>
+            </div>
+            <button type="submit" [disabled]="formExit.invalid">{{mensajeBoton}}</button>
+        </form>
+    </div>
+    <div class="descripcion">
+        <div class="stock" #amount>
+            <p class="titulo" *ngIf="!isNew">Seleccione un material</p>
+            <p class="titulo" *ngIf="isNew">Unidades Disponibles</p>
+            <div class="unidades">
+                {{stock}} 
+            </div>
+        </div>
+        <div class="movimientos" #movimientos>
+            <p class="titulo">Productos Disponibles</p>
+            <app-buscador></app-buscador>
+            <div class="informacion">
+                <div class="mostrar" (click)="getSalidas();" *ngIf="isSalidas">
+                    <img src="assets/icons/lista.png" alt="">
+                    <p>Mostrar resultados</p>
+                </div>
+                <ng-container *ngIf="!isSalidas">
+                    <div class="box_tabla" *ngFor="let material of salidas" (click)="loadMaterial(material)">
+                        <p class="producto">{{material.name}} <br> id: {{material.id}}</p>
+                        <p class="categoria">{{material.description}}</p>
+                        <p class="contratista">{{material.type_material}}</p>
+                        <p class="contratista">{{material.und_m}}</p>
+                        <p class="und">{{material.amount}}</p>
+                    </div>
+                    <div class="mostrar" *ngIf="salidas.length == 0"><p>No se encontraron registros.</p></div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</div>
+<app-filtros *ngIf="modal"></app-filtros>
